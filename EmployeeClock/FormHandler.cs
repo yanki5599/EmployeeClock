@@ -8,5 +8,14 @@ namespace EmployeeClock
 {
     internal class FormHandler
     {
+        LoginForm loginForm;
+        PasswordChangeForm passwordChangeForm;
+        ClockForm clockForm;
+        public FormHandler() 
+        { 
+            loginForm = new LoginForm();
+            passwordChangeForm = new PasswordChangeForm();
+
+        }
     }
 }
