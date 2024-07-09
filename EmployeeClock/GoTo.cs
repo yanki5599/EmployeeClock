@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeClock
 {
-    internal enum ApplicatoinState
+    internal enum GoTo
     {
         Login,
         PasswordChange,

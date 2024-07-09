@@ -65,6 +65,7 @@
             button_login.TabIndex = 1;
             button_login.Text = "כניסה";
             button_login.UseVisualStyleBackColor = true;
+            button_login.Click += button_login_Click;
             // 
             // button_changePassword
             // 
@@ -74,6 +75,7 @@
             button_changePassword.TabIndex = 1;
             button_changePassword.Text = "החלפת סיסמה";
             button_changePassword.UseVisualStyleBackColor = true;
+            button_changePassword.Click += button_changePassword_Click;
             // 
             // textBox_id
             // 
@@ -108,6 +110,7 @@
             RightToLeftLayout = true;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "שעון נוכחות- מסך התחברות";
+            FormClosed += LoginForm_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }

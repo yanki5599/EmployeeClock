@@ -91,6 +91,7 @@
             linkLabel_cancel.TabIndex = 1;
             linkLabel_cancel.TabStop = true;
             linkLabel_cancel.Text = "ביטול";
+            linkLabel_cancel.LinkClicked += linkLabel_cancel_LinkClicked;
             // 
             // textBox_id
             // 
@@ -132,6 +133,7 @@
             button_changePassword.TabIndex = 3;
             button_changePassword.Text = "החלפת סיסמה";
             button_changePassword.UseVisualStyleBackColor = true;
+            button_changePassword.Click += button_changePassword_Click;
             // 
             // PasswordChangeForm
             // 
@@ -154,8 +156,9 @@
             Name = "PasswordChangeForm";
             RightToLeft = RightToLeft.Yes;
             RightToLeftLayout = true;
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "שעון נוכחות - החלפת סיסמה";
+            FormClosed += PasswordChangeForm_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -1,6 +1,6 @@
 ﻿namespace EmployeeClock
 {
-    partial class Form1
+    partial class ClockForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -100,6 +100,7 @@
             linkLabel_cancel.TabIndex = 2;
             linkLabel_cancel.TabStop = true;
             linkLabel_cancel.Text = "ביטול";
+            linkLabel_cancel.LinkClicked += linkLabel_cancel_LinkClicked;
             // 
             // button_enter
             // 
@@ -112,6 +113,7 @@
             button_enter.TabIndex = 3;
             button_enter.Text = "כניסה";
             button_enter.UseVisualStyleBackColor = false;
+            button_enter.Click += button_enter_Click;
             // 
             // button_exit
             // 
@@ -124,6 +126,7 @@
             button_exit.TabIndex = 3;
             button_exit.Text = "יציאה";
             button_exit.UseVisualStyleBackColor = false;
+            button_exit.Click += button_exit_Click;
             // 
             // label_lastExitDate
             // 
@@ -137,7 +140,7 @@
             label_lastExitDate.TabIndex = 1;
             label_lastExitDate.Text = "01/01/01 12:00";
             // 
-            // Form1
+            // ClockForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -151,9 +154,11 @@
             Controls.Add(label_lastEnrtyDateLabel);
             Controls.Add(label_idNum);
             Controls.Add(label_idLabel);
-            Name = "Form1";
+            Name = "ClockForm";
             Padding = new Padding(50);
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
+            FormClosed += ClockForm_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }
