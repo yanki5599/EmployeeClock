@@ -25,7 +25,7 @@ namespace EmployeeClock.Services
 
         #endregion
 
-        public bool Create(EmpAttendence AttendRecord)
+        public bool Create(AttendenceRec AttendRecord)
         {
             string query = $"INSERT INTO {TableName} ({Col_EmployeeCode}, {Col_EntryTime}, {Col_ExitTime}) " +
                            $"VALUES ({AttendRecord.EmployeeCode}, '{AttendRecord.EntryTime}', '{AttendRecord.ExitTime}')";
@@ -33,19 +33,16 @@ namespace EmployeeClock.Services
             var dt = DBContext.MakeQuery(query);
             return dt != null; 
         }
-
-        public bool Delete(EmpAttendence AttendRecord)
+        public bool Delete(AttendenceRec AttendRecord)
         {
             string query = $"DELETE FROM {TableName} WHERE {Col_ID} = {AttendRecord.ID}";
 
             var dt = DBContext.MakeQuery(query); 
             return dt != null; 
         }
-
-
-        public List<EmpAttendence> GetAttendeesByEmpId(int id)
+        public List<AttendenceRec> GetAttendeesByEmpId(int id)
         {
-            List<EmpAttendence> attendees = new List<EmpAttendence>();
+            List<AttendenceRec> attendees = new List<AttendenceRec>();
 
             string query = $"SELECT {Col_ID}, {Col_EmployeeCode}, {Col_EntryTime}, {Col_ExitTime} " +
                            $"FROM {TableName} " +
@@ -62,16 +59,14 @@ namespace EmployeeClock.Services
                     DateTime entryTime = Convert.ToDateTime(row[Col_EntryTime]);
                     DateTime exitTime = Convert.ToDateTime(row[Col_ExitTime]);
 
-                    EmpAttendence attendee = new EmpAttendence(attendanceID, employeeCode, entryTime, exitTime);
+                    AttendenceRec attendee = new AttendenceRec(attendanceID, employeeCode, entryTime, exitTime);
                     attendees.Add(attendee);
                 }
             }
 
             return attendees;
         }
-
-
-        public bool Update(EmpAttendence AttendRecord)
+        public bool Update(AttendenceRec AttendRecord)
         {
             string query = $"UPDATE {TableName} " +
                            $"SET {Col_EmployeeCode} = {AttendRecord.EmployeeCode}, " +

@@ -11,7 +11,7 @@ namespace EmployeeClock.Services.Interfaces
     {
         bool IsEmployeeExist(int empId);
         bool ValidatePassword(PasswordRecord passwordRecord, string password);
-        bool GetEmpPassword(int empId);
-        DateTime GetLastAttendenseRecord(int empId);
+        PasswordRecord? GetEmpPassword(int empId);
+        AttendenceRec? GetLastAttendenseRecord(int empId);
     }
 }

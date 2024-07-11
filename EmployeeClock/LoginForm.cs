@@ -14,6 +14,7 @@ namespace EmployeeClock
     public partial class LoginForm : Form
     {
         FormHandler FormHandler;
+
         private bool ShouldExit = true;
         public LoginForm(FormHandler formHandler)
         {

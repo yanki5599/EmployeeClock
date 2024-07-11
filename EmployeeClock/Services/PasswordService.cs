@@ -23,19 +23,15 @@ namespace EmployeeClock.Services
 
         #endregion
 
-        private readonly DBContext _dbContext;
 
-        public PasswordService(DBContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+       
 
         public bool Create(PasswordRecord record)
         {
             string query = $"INSERT INTO {TableName} ({Col_EmployeeID}, {Col_EmployeePassword}, {Col_ExpiryDate}, {Col_IsActive}) " +
                            $"VALUES ({record.EmployeeID}, '{record.EmployeePassword}', '{record.ExpiryDate}', '{(record.IsActive ? 1 : 0)}')";
 
-            var dt = _dbContext.MakeQuery(query); 
+            var dt = DBContext.MakeQuery(query); 
             return dt != null; 
         }
 
@@ -43,7 +39,7 @@ namespace EmployeeClock.Services
         {
             string query = $"DELETE FROM {TableName} WHERE {Col_ID} = {record.ID}";
 
-            var dt = _dbContext.MakeQuery(query); 
+            var dt = DBContext.MakeQuery(query); 
             return dt != null; 
         }
 
@@ -55,7 +51,7 @@ namespace EmployeeClock.Services
                            $"FROM {TableName} " +
                            $"WHERE {Col_EmployeeID} = {empId}";
 
-            var dt = _dbContext.MakeQuery(query); 
+            var dt = DBContext.MakeQuery(query); 
 
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -80,7 +76,7 @@ namespace EmployeeClock.Services
                                $"{Col_IsActive} = '{(record.IsActive ? 1 : 0)}' " +
                            $"WHERE {Col_ID} = {record.ID}";
 
-            var dt = _dbContext.MakeQuery(query); 
+            var dt = DBContext.MakeQuery(query); 
             return dt != null; // Return true if update was successful
         }
     }

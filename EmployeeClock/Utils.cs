@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace EmployeeClock
             return dataTable.Rows.Count == 0;
         }
 
-        internal static bool isValidNatId(string idStr)
+        public static bool isValidNatId(string idStr)
         {
             // Check if the input string is exactly 9 digits long
             if (idStr.Length != 9 || !Regex.IsMatch(idStr, @"^\d{9}$"))
@@ -61,5 +62,18 @@ namespace EmployeeClock
             return true;
         }
 
+        public static string HashPassword(string password)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < hashedBytes.Length; i++)
+                {
+                    builder.Append(hashedBytes[i].ToString("x2")); // Convert byte to hexadecimal string
+                }
+                return builder.ToString();
+            }
+        }
     }
 }

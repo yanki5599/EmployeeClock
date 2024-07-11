@@ -10,19 +10,30 @@ namespace EmployeeClock.Services
 {
     internal class ShiftsService : IShiftsService
     {
-        public bool GetEmpPassword(int empId)
+        AttendenceService AttendenceService { get;  }
+        EmployeeService EmployeeService { get; }
+        PasswordService PasswordService { get;   }
+
+        public ShiftsService() 
+        { 
+            AttendenceService = new AttendenceService();
+            EmployeeService = new EmployeeService();
+            PasswordService = new PasswordService();
+        }
+        public PasswordRecord? GetEmpPassword(int empId)
         {
-            throw new NotImplementedException();
+            return PasswordService.GetByEmpId(empId);
         }
 
-        public DateTime GetLastAttendenseRecord(int empId)
+        public AttendenceRec? GetLastAttendenseRecord(int empId)
         {
-            throw new NotImplementedException();
+            var list = AttendenceService.GetAttendeesByEmpId(empId);
+            return list.Max();
         }
 
         public bool IsEmployeeExist(int empId)
         {
-            throw new NotImplementedException();
+            return EmployeeService.GetById(empId) != null;
         }
 
         public bool ValidatePassword(PasswordRecord passwordRecord, string password)

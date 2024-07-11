@@ -13,7 +13,6 @@ namespace EmployeeClock.Services
 {
     internal class EmployeeService : IEmployeeService
     {
-        DBContext _dbContext;
 
         #region constants
 
@@ -25,10 +24,6 @@ namespace EmployeeClock.Services
 
         #endregion
 
-        public EmployeeService(DBContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
 
         public bool Create(EmpInfo empInfo)
         {
@@ -43,7 +38,7 @@ namespace EmployeeClock.Services
         public EmpInfo? GetById(int id)
         {
             string query = $"SELECT * FROM {TableName} WHERE {Col_id} = {id}";
-            DataTable? dt = _dbContext.MakeQuery(query);
+            DataTable? dt = DBContext.MakeQuery(query);
 
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -66,14 +61,14 @@ namespace EmployeeClock.Services
         public EmpInfo GeyByTz(string tz)
         {
             string query = $"SELECT * FROM {TableName} WHERE {Col_tz} = {tz}";
-            DataTable? dt = _dbContext.MakeQuery(query);
+            DataTable? dt = DBContext.MakeQuery(query);
 
             if (dt != null && dt.Rows.Count > 0)
             {
 
                 EmpInfo empInfo = new EmpInfo
                 (
-                   dt.Rows[0][Col_id].ToString(),
+                   Convert.ToInt32(dt.Rows[0][Col_id]),
                    dt.Rows[0][Col_tz].ToString(),
                    dt.Rows[0][col_fname].ToString(),
                    dt.Rows[0][col_lname].ToString()
@@ -90,7 +85,7 @@ namespace EmployeeClock.Services
         {
             string query = $"DELETE FROM {TableName} WHERE {Col_id} = '{empInfo.ID}'";
 
-            var dt = _dbContext.MakeQuery(query);
+            var dt = DBContext.MakeQuery(query);
             return dt != null;
         }
 
@@ -105,7 +100,7 @@ namespace EmployeeClock.Services
                            $"WHERE {Col_id} = '{empInfo.ID}'";
 
             
-            var dt = _dbContext.MakeQuery(query);
+            var dt = DBContext.MakeQuery(query);
 
             
             return dt != null;
