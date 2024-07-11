@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeClock.Model
 {
-    internal class EmpInfo
+    public class EmpInfo
     {
         public EmpInfo(int iD, string employeeNat, string firstName, string lastName)
         {

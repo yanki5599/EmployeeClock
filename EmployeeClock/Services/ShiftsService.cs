@@ -31,14 +31,24 @@ namespace EmployeeClock.Services
             return list.Max();
         }
 
-        public bool IsEmployeeExist(int empId)
+        public bool IsEmployeeExist(string empTz , out EmpInfo? empInfo)
         {
-            return EmployeeService.GetById(empId) != null;
+            empInfo = EmployeeService.GeyByTz(empTz);
+            return empInfo != null;
         }
 
-        public bool ValidatePassword(PasswordRecord passwordRecord, string password)
+        public bool ValidateUserPass(EmpInfo empInfo, string password)
         {
-            throw new NotImplementedException();
+            var passRec = PasswordService.GetByEmpId(empInfo.ID);
+            if (passRec == null)
+            {
+                return false;
+                throw new Exception("Critic error: user does not have a password");
+            }
+
+            return passRec.EmployeePassword == Utils.Hash256Password(password);
         }
+
+    
     }
 }

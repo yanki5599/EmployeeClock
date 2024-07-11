@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmployeeClock.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,12 +13,10 @@ namespace EmployeeClock
         PasswordChangeForm? passwordChangeForm;
         ClockForm? clockForm;
 
-        FormName appState = FormName.Login;
-        public FormHandler() 
-        { 
-        }
+        //FormName appState = FormName.Login;
+       
 
-        internal void Goto(FormName state , object? empInfo = null)
+        internal void Goto(FormName state , EmpInfo? empInfo = null)
         {
             CloseAllForms();
             switch (state)

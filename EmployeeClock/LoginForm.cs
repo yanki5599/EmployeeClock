@@ -1,4 +1,5 @@
 ﻿using EmployeeClock.Model;
+using EmployeeClock.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,7 @@ namespace EmployeeClock
     public partial class LoginForm : Form
     {
         FormHandler FormHandler;
+        ShiftsService ShiftsService = new ShiftsService();
 
         private bool ShouldExit = true;
         public LoginForm(FormHandler formHandler)
@@ -30,30 +32,47 @@ namespace EmployeeClock
 
         private void button_login_Click(object sender, EventArgs e)
         {
-            bool validInfo = ValidateInfo(out EmpInfo empInfo);
-            if (validInfo)
+            if (ValidateInfo(out EmpInfo? empInfo))
             {
                 FormHandler.Goto(FormName.Clock, empInfo);
             }
         }
 
-        private bool ValidateInfo(out EmpInfo empInfo)
+        private bool ValidateInfo(out EmpInfo? empInfo)
         {
             // get id from form
 
-            string idStr = textBox_id.Text;
-
+            string idStr = textBox_id.Text.Trim();
             bool valid = Utils.isValidNatId(idStr);
-
+            if (!valid)
+            {
+                MessageBox.Show("הכנס מס' זהות תקין.", "שגיאת פורמט", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                empInfo = null;
+                return false;
+            }
 
             //check if exist in db
-            valid &= 
-            //get pass from form
-            // hash
-            // get pass from db
-            // compare
-            // return
+            valid = ShiftsService.IsEmployeeExist(idStr , out EmpInfo? empInfo1);
+            if (!valid)
+            {
+                MessageBox.Show("משתמש לא נמצא!", "לא נמצא", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                empInfo = null;
+                textBox_id = null; // reset field
+                return false;
+            }
 
+            //get pass from form
+            string password = textBox_password.Text.Trim();
+            valid = ShiftsService.ValidateUserPass(empInfo1, password);
+            if (!valid)
+            {
+                MessageBox.Show("סיסמה שגויה!", "שגיאה", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                empInfo = null;
+                textBox_password = null; // reset field
+                return false;
+            }
+
+            empInfo = empInfo1;
             return true;
         }
 

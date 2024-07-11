@@ -27,20 +27,6 @@ namespace EmployeeClock
             // Convert the ID to an array of integers for easier manipulation
             int[] digits = idStr.Select(c => int.Parse(c.ToString())).ToArray();
 
-            // Check the first digit (gender identifier)
-            int genderDigit = digits[0];
-            if (genderDigit != 1 && genderDigit != 2) // 1 for males, 2 for females
-            {
-                return false;
-            }
-
-            // Validate the year of birth (next two digits)
-            int yearDigits = digits[1] * 10 + digits[2];
-            int currentYearLastDigits = int.Parse(DateTime.Now.ToString("yy"));
-            if (yearDigits > currentYearLastDigits || yearDigits < 0)
-            {
-                return false;
-            }
 
             // Validate the rest of the digits using the Israeli ID checksum algorithm
             int sum = 0;
@@ -62,7 +48,7 @@ namespace EmployeeClock
             return true;
         }
 
-        public static string HashPassword(string password)
+        public static string Hash256Password(string password)
         {
             using (SHA256 sha256 = SHA256.Create())
             {

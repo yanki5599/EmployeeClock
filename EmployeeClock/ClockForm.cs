@@ -1,4 +1,6 @@
 
+using EmployeeClock.Model;
+
 namespace EmployeeClock
 {
     public partial class ClockForm : Form
@@ -6,7 +8,7 @@ namespace EmployeeClock
         FormHandler FormHandler;
         private bool ShouldExit = true;
 
-        public ClockForm(FormHandler formHandler, object? empInfo)
+        public ClockForm(FormHandler formHandler, EmpInfo empInfo)
         {
             FormHandler = formHandler;
             InitializeComponent();

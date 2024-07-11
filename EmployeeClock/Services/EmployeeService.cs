@@ -31,7 +31,7 @@ namespace EmployeeClock.Services
                 $"{TableName}({Col_tz},{col_fname},{col_lname})" +
                 $"VALUES({empInfo.EmployeeNat},{empInfo.FirstName},{empInfo.LastName});";
 
-            var dt = _dbContext.MakeQuery(query);
+            var dt = DBContext.MakeQuery(query);
             return dt != null;
         }
 
@@ -58,7 +58,7 @@ namespace EmployeeClock.Services
             }
         }
 
-        public EmpInfo GeyByTz(string tz)
+        public EmpInfo? GeyByTz(string tz)
         {
             string query = $"SELECT * FROM {TableName} WHERE {Col_tz} = {tz}";
             DataTable? dt = DBContext.MakeQuery(query);
