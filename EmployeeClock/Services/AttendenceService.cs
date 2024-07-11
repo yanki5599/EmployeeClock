@@ -12,12 +12,8 @@ namespace EmployeeClock.Services
 {
     internal class AttendenceService : IAttendenceService
     {
-        DBContext _dbContext;
 
-        public AttendenceService(DBContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+
 
         #region Constants
 
@@ -34,7 +30,7 @@ namespace EmployeeClock.Services
             string query = $"INSERT INTO {TableName} ({Col_EmployeeCode}, {Col_EntryTime}, {Col_ExitTime}) " +
                            $"VALUES ({AttendRecord.EmployeeCode}, '{AttendRecord.EntryTime}', '{AttendRecord.ExitTime}')";
 
-            var dt = _dbContext.MakeQuery(query);
+            var dt = DBContext.MakeQuery(query);
             return dt != null; 
         }
 
@@ -42,7 +38,7 @@ namespace EmployeeClock.Services
         {
             string query = $"DELETE FROM {TableName} WHERE {Col_ID} = {AttendRecord.ID}";
 
-            var dt = _dbContext.MakeQuery(query); 
+            var dt = DBContext.MakeQuery(query); 
             return dt != null; 
         }
 
@@ -55,7 +51,7 @@ namespace EmployeeClock.Services
                            $"FROM {TableName} " +
                            $"WHERE {Col_EmployeeCode} = {id}";
 
-            DataTable? dt = _dbContext.MakeQuery(query); 
+            DataTable? dt = DBContext.MakeQuery(query); 
 
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -83,7 +79,7 @@ namespace EmployeeClock.Services
                                $"{Col_ExitTime} = '{AttendRecord.ExitTime}' " +
                            $"WHERE {Col_ID} = {AttendRecord.ID}";
 
-            var dt = _dbContext.MakeQuery(query); 
+            var dt = DBContext.MakeQuery(query); 
             return dt != null; 
         }
 

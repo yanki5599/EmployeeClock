@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmployeeClock.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,16 +29,30 @@ namespace EmployeeClock
 
         private void button_login_Click(object sender, EventArgs e)
         {
-            bool validInfo = ValidateInfo(out object empInfo);
+            bool validInfo = ValidateInfo(out EmpInfo empInfo);
             if (validInfo)
             {
-                FormHandler.Goto(GoTo.Clock, empInfo);
+                FormHandler.Goto(FormName.Clock, empInfo);
             }
         }
 
-        private bool ValidateInfo(out object empInfo)
+        private bool ValidateInfo(out EmpInfo empInfo)
         {
-            empInfo = null;
+            // get id from form
+
+            string idStr = textBox_id.Text;
+
+            bool valid = Utils.isValidNatId(idStr);
+
+
+            //check if exist in db
+            valid &= 
+            //get pass from form
+            // hash
+            // get pass from db
+            // compare
+            // return
+
             return true;
         }
 
@@ -49,7 +64,7 @@ namespace EmployeeClock
 
         private void button_changePassword_Click(object sender, EventArgs e)
         {
-            FormHandler.Goto(GoTo.PasswordChange);
+            FormHandler.Goto(FormName.PasswordChange);
         }
 
         

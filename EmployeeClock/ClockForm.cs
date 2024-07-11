@@ -26,7 +26,7 @@ namespace EmployeeClock
 
         private void linkLabel_cancel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            FormHandler.Goto(GoTo.Login);
+            FormHandler.Goto(FormName.Login);
         }
 
         private void button_enter_Click(object sender, EventArgs e)

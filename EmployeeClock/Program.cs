@@ -16,9 +16,9 @@ namespace EmployeeClock
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            DBContext dBContext = new DBContext(DBConfig.connectionString);
+            
             string query = "insert into employees(EmployeeNat,FirstName,LastName) values(456789123,'j','g');";
-            DataTable? dt = dBContext.MakeQuery(query);
+            DataTable? dt = DBContext.MakeQuery(query);
             printDT(dt);
 
 

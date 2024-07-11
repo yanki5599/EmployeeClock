@@ -12,25 +12,25 @@ namespace EmployeeClock
         PasswordChangeForm? passwordChangeForm;
         ClockForm? clockForm;
 
-        GoTo appState = GoTo.Login;
+        FormName appState = FormName.Login;
         public FormHandler() 
         { 
         }
 
-        internal void Goto(GoTo state , object? empInfo = null)
+        internal void Goto(FormName state , object? empInfo = null)
         {
             CloseAllForms();
             switch (state)
             {
-                case GoTo.Login:
+                case FormName.Login:
                     loginForm = new LoginForm(this);
                     loginForm.Show();
                     break;
-                case GoTo.PasswordChange:
+                case FormName.PasswordChange:
                     passwordChangeForm = new PasswordChangeForm(this);
                     passwordChangeForm.Show();
                     break;
-                case GoTo.Clock:
+                case FormName.Clock:
                     clockForm = new ClockForm(this,empInfo);
                     clockForm.Show();
                     break;

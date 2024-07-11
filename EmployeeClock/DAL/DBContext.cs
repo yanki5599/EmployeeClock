@@ -9,16 +9,11 @@ using System.Data.SqlClient;
 
 namespace EmployeeClock.DAL
 {
-    internal class DBContext
+    internal static class DBContext
     {
-        private readonly string _connectionString;
+        private static string _connectionString = DBConfig.connectionString;
 
-        public DBContext(string connectionString) 
-        { 
-            _connectionString = connectionString;
-        }
-
-        public DataTable? MakeQuery(string queryStr)
+        public static DataTable? MakeQuery(string queryStr)
         {
             DataTable output = new DataTable();
 
@@ -43,6 +38,29 @@ namespace EmployeeClock.DAL
             }
 
             return output;
+        }
+
+        public static int ExecuteNonQuery(string queryStr)
+        {
+            int affectedRows = 0;
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(queryStr, conn))
+                {
+                    try
+                    {
+                        conn.Open();
+                        affectedRows = cmd.ExecuteNonQuery();
+                    }
+                    catch (SqlException ex)
+                    {
+                        Console.WriteLine("An error occured: " + ex.Message);
+                        return -1;
+                    }
+                }
+            }
+            return affectedRows;
         }
     }
 }

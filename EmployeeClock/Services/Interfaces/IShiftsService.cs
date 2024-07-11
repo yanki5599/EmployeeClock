@@ -9,8 +9,9 @@ namespace EmployeeClock.Services.Interfaces
 {
     internal interface IShiftsService
     {
-        EmpInfo GetEmpByTz(string tz);
-        PasswordRecord GetPasswordById(int id);
-        List<EmpAttendence> GetEmpAttendences(int empId);
+        bool IsEmployeeExist(int empId);
+        bool ValidatePassword(PasswordRecord passwordRecord, string password);
+        bool GetEmpPassword(int empId);
+        DateTime GetLastAttendenseRecord(int empId);
     }
 }
