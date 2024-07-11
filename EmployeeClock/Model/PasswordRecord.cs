@@ -10,11 +10,11 @@ namespace EmployeeClock.Model
     {
         public int ID { get; set; } // Primary key, identity column
         public int EmployeeID { get; set; } // Foreign key to Employees table
-        public string EmployeePassword { get; set; } // remember Storing hashed passwords as VARBINARY(256)
+        public byte[] EmployeePassword { get; set; } // remember Storing hashed passwords as VARBINARY(256)
         public DateTime ExpiryDate { get; set; }
         public bool IsActive { get; set; }
 
-        public PasswordRecord(int iD, int employeeID, string employeePassword, DateTime expiryDate, bool isActive)
+        public PasswordRecord(int iD, int employeeID, byte[] employeePassword, DateTime expiryDate, bool isActive)
         {
             ID = iD;
             EmployeeID = employeeID;

@@ -40,6 +40,7 @@ namespace EmployeeClock.Services
         public bool ValidateUserPass(EmpInfo empInfo, string password)
         {
             var passRec = PasswordService.GetByEmpId(empInfo.ID);
+            MessageBox.Show($"from db: {passRec.EmployeePassword}, from input: {password}");
             if (passRec == null)
             {
                 return false;

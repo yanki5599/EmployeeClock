@@ -52,7 +52,7 @@ namespace EmployeeClock
         {
             using (SHA256 sha256 = SHA256.Create())
             {
-                byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                byte[] hashedBytes = sha256.ComputeHash(Encoding.ASCII.GetBytes(password));
                 StringBuilder builder = new StringBuilder();
                 for (int i = 0; i < hashedBytes.Length; i++)
                 {

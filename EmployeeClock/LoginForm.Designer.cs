@@ -62,7 +62,7 @@
             button_login.Location = new Point(174, 308);
             button_login.Name = "button_login";
             button_login.Size = new Size(183, 38);
-            button_login.TabIndex = 1;
+            button_login.TabIndex = 2;
             button_login.Text = "כניסה";
             button_login.UseVisualStyleBackColor = true;
             button_login.Click += button_login_Click;
@@ -72,7 +72,7 @@
             button_changePassword.Location = new Point(174, 365);
             button_changePassword.Name = "button_changePassword";
             button_changePassword.Size = new Size(183, 38);
-            button_changePassword.TabIndex = 1;
+            button_changePassword.TabIndex = 3;
             button_changePassword.Text = "החלפת סיסמה";
             button_changePassword.UseVisualStyleBackColor = true;
             button_changePassword.Click += button_changePassword_Click;
@@ -82,14 +82,14 @@
             textBox_id.Location = new Point(190, 119);
             textBox_id.Name = "textBox_id";
             textBox_id.Size = new Size(150, 23);
-            textBox_id.TabIndex = 2;
+            textBox_id.TabIndex = 0;
             // 
             // textBox_password
             // 
             textBox_password.Location = new Point(190, 207);
             textBox_password.Name = "textBox_password";
             textBox_password.Size = new Size(150, 23);
-            textBox_password.TabIndex = 2;
+            textBox_password.TabIndex = 1;
             // 
             // LoginForm
             // 

@@ -58,7 +58,7 @@ namespace EmployeeClock.Services
                 DataRow row = dt.Rows[0];
                 int id = Convert.ToInt32(row[Col_ID]);
                 int employeeID = Convert.ToInt32(row[Col_EmployeeID]);
-                string employeePassword = row[Col_EmployeePassword].ToString();
+                byte[] employeePassword = (byte[])row[Col_EmployeePassword];
                 DateTime expiryDate = Convert.ToDateTime(row[Col_ExpiryDate]);
                 bool isActive = Convert.ToBoolean(row[Col_IsActive]);
 

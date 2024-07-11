@@ -57,7 +57,7 @@ namespace EmployeeClock
             {
                 MessageBox.Show("משתמש לא נמצא!", "לא נמצא", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 empInfo = null;
-                textBox_id = null; // reset field
+                textBox_id.Text = null; // reset field
                 return false;
             }
 
@@ -68,7 +68,7 @@ namespace EmployeeClock
             {
                 MessageBox.Show("סיסמה שגויה!", "שגיאה", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 empInfo = null;
-                textBox_password = null; // reset field
+                textBox_password.Text = null; // reset field
                 return false;
             }
 
