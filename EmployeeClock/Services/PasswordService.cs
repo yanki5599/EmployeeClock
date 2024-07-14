@@ -4,6 +4,7 @@ using EmployeeClock.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,14 +72,26 @@ namespace EmployeeClock.Services
         public bool Update(PasswordRecord record)
         {
             string query = $"UPDATE {TableName} " +
-                           $"SET {Col_EmployeePassword} = '{record.EmployeePassword}', " +
-                               $"{Col_ExpiryDate} = '{record.ExpiryDate}', " +
-                               $"{Col_IsActive} = '{(record.IsActive ? 1 : 0)}' " +
-                           $"WHERE {Col_ID} = {record.ID}";
+                           $"SET {Col_EmployeePassword} = @EmployeePassword, " +
+                               $"{Col_ExpiryDate} = @ExpiryDate, " +
+                               $"{Col_IsActive} = @IsActive " +
+                           $"WHERE {Col_ID} = @ID";
 
-            var dt = DBContext.MakeQuery(query); 
-            return dt != null; // Return true if update was successful
+            List<SqlParameter> parameters = new List<SqlParameter>
+            {
+                new SqlParameter("@EmployeePassword", SqlDbType.VarBinary) { Value = record.EmployeePassword },
+                new SqlParameter("@ExpiryDate", SqlDbType.DateTime) { Value = record.ExpiryDate },
+                new SqlParameter("@IsActive", SqlDbType.Bit) { Value = record.IsActive },
+                new SqlParameter("@ID", SqlDbType.Int) { Value = record.ID }
+            };
+
+            // Execute the query with parameters
+            int rowsAffected = DBContext.ExecuteNonQuery(query, parameters.ToArray());
+
+            // Check if the query executed successfully
+            return rowsAffected > 0;
         }
+
     }
 
 }

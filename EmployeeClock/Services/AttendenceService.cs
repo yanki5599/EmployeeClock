@@ -50,7 +50,7 @@ namespace EmployeeClock.Services
             }
 
             // Execute the query with parameters
-            var dt =  DBContext.MakeQuery(query, parameters);
+            var dt =  DBContext.MakeQuery(query, parameters.ToArray());
 
             // Check if the query executed successfully
             return dt != null;
@@ -91,18 +91,7 @@ namespace EmployeeClock.Services
         }
 
 
-        /*public bool Update(AttendenceRec AttendRecord)
-        {
-            string query = $"UPDATE {TableName} " +
-                           $"SET {Col_EmployeeCode} = {AttendRecord.EmployeeCode}, " +
-                               $"{Col_EntryTime} = '{AttendRecord.EntryTime}', " +
-                               $"{Col_ExitTime} = '{AttendRecord.ExitTime}' " +
-                           $"WHERE {Col_ID} = {AttendRecord.ID}";
-
-            var dt = DBContext.MakeQuery(query); 
-            return dt != null; 
-        }*/
-
+      
         public bool Update(AttendenceRec AttendRecord)
         {
             // Use parameterized query to avoid SQL injection
@@ -122,10 +111,10 @@ namespace EmployeeClock.Services
             };
 
             // Execute the query with parameters
-            var dt = DBContext.MakeQuery(query, parameters);
+            var rowsAffected = DBContext.ExecuteNonQuery(query, parameters.ToArray());
 
             // Check if the query executed successfully
-            return dt != null;
+            return rowsAffected > 0;
         }
 
 

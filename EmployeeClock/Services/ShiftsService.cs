@@ -3,6 +3,7 @@ using EmployeeClock.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -40,7 +41,6 @@ namespace EmployeeClock.Services
         public bool ValidateUserPass(EmpInfo empInfo, string password)
         {
             var passRec = PasswordService.GetByEmpId(empInfo.ID);
-            MessageBox.Show($"from db: {passRec.EmployeePassword}, from input: {password}");
             if (passRec == null)
             {
                 return false;
@@ -58,6 +58,20 @@ namespace EmployeeClock.Services
         public void UpdateExit( AttendenceRec last)
         {
             AttendenceService.Update(last);
+        }
+
+        public bool UpdatePassword(EmpInfo? empInfo, string newPassStr)
+        {
+            var passwordRec = PasswordService.GetByEmpId(empInfo.ID);
+            if (passwordRec == null) throw new Exception("password not found");
+
+            var newPass = new PasswordRecord(passwordRec);
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                newPass.EmployeePassword = sha256.ComputeHash(Encoding.UTF8.GetBytes(newPassStr));
+            }
+
+            return PasswordService.Update(newPass);
         }
     }
 }

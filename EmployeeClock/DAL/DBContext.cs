@@ -42,7 +42,7 @@ namespace EmployeeClock.DAL
             return output;
         }
 
-        public static DataTable? MakeQuery(string queryStr, List<SqlParameter> sqlParameters)
+        public static DataTable? MakeQuery(string queryStr, params SqlParameter[] sqlParameters)
         {
             DataTable output = new DataTable();
 
@@ -53,7 +53,7 @@ namespace EmployeeClock.DAL
                     // Add parameters to the command if they exist
                     if (sqlParameters != null)
                     {
-                        cmd.Parameters.AddRange(sqlParameters.ToArray());
+                        cmd.Parameters.AddRange(sqlParameters);
                     }
 
                     try
@@ -106,6 +106,30 @@ namespace EmployeeClock.DAL
                     try
                     {
                         conn.Open();
+                        affectedRows = cmd.ExecuteNonQuery();
+                    }
+                    catch (SqlException ex)
+                    {
+                        Console.WriteLine("An error occured: " + ex.Message);
+                        return -1;
+                    }
+                }
+            }
+            return affectedRows;
+        }
+
+        public static int ExecuteNonQuery(string queryStr , params SqlParameter[] sqlParameters)
+        {
+            int affectedRows = 0;
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(queryStr, conn))
+                {
+                    try
+                    {
+                        conn.Open();
+                        cmd.Parameters.AddRange(sqlParameters);
                         affectedRows = cmd.ExecuteNonQuery();
                     }
                     catch (SqlException ex)

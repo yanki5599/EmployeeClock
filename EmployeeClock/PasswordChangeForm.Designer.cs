@@ -88,7 +88,7 @@
             linkLabel_cancel.Location = new Point(72, 324);
             linkLabel_cancel.Name = "linkLabel_cancel";
             linkLabel_cancel.Size = new Size(56, 25);
-            linkLabel_cancel.TabIndex = 1;
+            linkLabel_cancel.TabIndex = 5;
             linkLabel_cancel.TabStop = true;
             linkLabel_cancel.Text = "ביטול";
             linkLabel_cancel.LinkClicked += linkLabel_cancel_LinkClicked;
@@ -99,7 +99,7 @@
             textBox_id.Location = new Point(286, 93);
             textBox_id.Name = "textBox_id";
             textBox_id.Size = new Size(151, 32);
-            textBox_id.TabIndex = 2;
+            textBox_id.TabIndex = 0;
             // 
             // textBox_oldPassword
             // 
@@ -107,7 +107,7 @@
             textBox_oldPassword.Location = new Point(286, 146);
             textBox_oldPassword.Name = "textBox_oldPassword";
             textBox_oldPassword.Size = new Size(151, 32);
-            textBox_oldPassword.TabIndex = 2;
+            textBox_oldPassword.TabIndex = 1;
             // 
             // textBox_newPassword
             // 
@@ -123,14 +123,14 @@
             textBox_confirmNewPassword.Location = new Point(286, 260);
             textBox_confirmNewPassword.Name = "textBox_confirmNewPassword";
             textBox_confirmNewPassword.Size = new Size(151, 32);
-            textBox_confirmNewPassword.TabIndex = 2;
+            textBox_confirmNewPassword.TabIndex = 3;
             // 
             // button_changePassword
             // 
             button_changePassword.Location = new Point(286, 373);
             button_changePassword.Name = "button_changePassword";
             button_changePassword.Size = new Size(151, 37);
-            button_changePassword.TabIndex = 3;
+            button_changePassword.TabIndex = 4;
             button_changePassword.Text = "החלפת סיסמה";
             button_changePassword.UseVisualStyleBackColor = true;
             button_changePassword.Click += button_changePassword_Click;
