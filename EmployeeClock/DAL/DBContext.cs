@@ -86,7 +86,7 @@ namespace EmployeeClock.DAL
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("secrets.json") // Add secrets.json
             .Build();
-        
+            
             // Read a value from the configuration
             string connString = builder["ConnectionString"];
 

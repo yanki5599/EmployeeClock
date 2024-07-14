@@ -35,6 +35,7 @@
             button_changePassword = new Button();
             textBox_id = new TextBox();
             textBox_password = new TextBox();
+            checkBox_showPass = new CheckBox();
             SuspendLayout();
             // 
             // label_id
@@ -88,14 +89,27 @@
             // 
             textBox_password.Location = new Point(190, 207);
             textBox_password.Name = "textBox_password";
+            textBox_password.PasswordChar = '*';
             textBox_password.Size = new Size(150, 23);
             textBox_password.TabIndex = 1;
+            // 
+            // checkBox_showPass
+            // 
+            checkBox_showPass.AutoSize = true;
+            checkBox_showPass.Location = new Point(190, 236);
+            checkBox_showPass.Name = "checkBox_showPass";
+            checkBox_showPass.Size = new Size(84, 19);
+            checkBox_showPass.TabIndex = 4;
+            checkBox_showPass.Text = "הצג סיסמה";
+            checkBox_showPass.UseVisualStyleBackColor = true;
+            checkBox_showPass.CheckedChanged += checkBox_showPass_CheckedChanged;
             // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(519, 450);
+            Controls.Add(checkBox_showPass);
             Controls.Add(textBox_password);
             Controls.Add(textBox_id);
             Controls.Add(button_changePassword);
@@ -123,5 +137,6 @@
         private Button button_changePassword;
         private TextBox textBox_id;
         private TextBox textBox_password;
+        private CheckBox checkBox_showPass;
     }
 }

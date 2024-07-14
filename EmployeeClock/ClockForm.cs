@@ -4,7 +4,7 @@ using EmployeeClock.Services;
 
 namespace EmployeeClock
 {
-    public partial class ClockForm : Form
+    public partial class ClockForm : ReaLTaiizor.Forms.MaterialForm
     {
         FormHandler FormHandler;
         ShiftsService ShiftsService;
@@ -38,7 +38,10 @@ namespace EmployeeClock
         private void ClockForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (ShouldExit)
+            {
+                if (Utils.AreYouSureMsg("??? ??? ???? ??????? ?????")) ;
                 Application.Exit();
+            }
         }
 
         private void linkLabel_cancel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

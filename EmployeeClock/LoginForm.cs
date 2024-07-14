@@ -12,13 +12,13 @@ using System.Windows.Forms;
 
 namespace EmployeeClock
 {
-    public partial class LoginForm : Form
+    public partial class LoginForm : ReaLTaiizor.Forms.MaterialForm 
     {
         FormHandler FormHandler;
         ShiftsService ShiftsService;
 
         private bool ShouldExit = true;
-        public LoginForm(FormHandler formHandler , ShiftsService shiftsService)
+        public LoginForm(FormHandler formHandler, ShiftsService shiftsService)
         {
             ShiftsService = shiftsService;
             FormHandler = formHandler;
@@ -28,8 +28,12 @@ namespace EmployeeClock
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (ShouldExit)
-                Application.Exit();
+            {
+                if (Utils.AreYouSureMsg("האם אתה בטוח שברצונך לצאת?"));
+                    Application.Exit();
+            }
         }
+        
 
         private void button_login_Click(object sender, EventArgs e)
         {
@@ -53,7 +57,7 @@ namespace EmployeeClock
             }
 
             //check if exist in db
-            valid = ShiftsService.IsEmployeeExist(idStr , out EmpInfo? empInfo1);
+            valid = ShiftsService.IsEmployeeExist(idStr, out EmpInfo? empInfo1);
             if (!valid)
             {
                 MessageBox.Show("משתמש לא נמצא!", "לא נמצא", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -88,6 +92,13 @@ namespace EmployeeClock
             FormHandler.Goto(FormName.PasswordChange);
         }
 
-        
+
+       
+
+        private void checkBox_showPass_CheckedChanged(object sender, EventArgs e)
+        {
+            textBox_password.PasswordChar = checkBox_showPass.Checked ? '\0' : '*';
+
+        }
     }
 }

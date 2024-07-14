@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace EmployeeClock
 {
-    public partial class PasswordChangeForm : Form
+    public partial class PasswordChangeForm : ReaLTaiizor.Forms.MaterialForm
     {
         FormHandler FormHandler;
         ShiftsService ShiftsService;
@@ -35,7 +35,10 @@ namespace EmployeeClock
         private void PasswordChangeForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (ShouldExit)
+            {
+                if (Utils.AreYouSureMsg("האם אתה בטוח שברצונך לצאת?")) ;
                 Application.Exit();
+            }
         }
 
         private void linkLabel_cancel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
