@@ -1,4 +1,5 @@
 using EmployeeClock.DAL;
+using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Runtime.InteropServices;
 
@@ -12,15 +13,11 @@ namespace EmployeeClock
         [STAThread]
         static void Main()
         {
+
+
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-
-
-            /*  string query = "insert into employees(EmployeeNat,FirstName,LastName) values(456789123,'j','g');";
-              DataTable? dt = DBContext.MakeQuery(query);
-              printDT(dt);*/
-
 
             FormHandler formHandler = new FormHandler();
             formHandler.Run();

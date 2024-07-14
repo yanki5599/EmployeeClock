@@ -10,7 +10,7 @@ namespace EmployeeClock.Services.Interfaces
     internal interface IAttendenceService
     {
         // CRUD
-        bool Create(AttendenceRec AttendRecord);
+        bool Create(int empId, DateTime entry, DateTime? exit = null);
         List<AttendenceRec> GetAttendeesByEmpId(int id);
         bool Update(AttendenceRec AttendRecord);
         bool Delete(AttendenceRec AttendRecord);

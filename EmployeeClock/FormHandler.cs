@@ -1,4 +1,5 @@
 ﻿using EmployeeClock.Model;
+using EmployeeClock.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace EmployeeClock
 {
     public class FormHandler
     {
+        ShiftsService ShiftsService = new ShiftsService();
         LoginForm? loginForm;
         PasswordChangeForm? passwordChangeForm;
         ClockForm? clockForm;
@@ -22,15 +24,15 @@ namespace EmployeeClock
             switch (state)
             {
                 case FormName.Login:
-                    loginForm = new LoginForm(this);
+                    loginForm = new LoginForm(this, ShiftsService);
                     loginForm.Show();
                     break;
                 case FormName.PasswordChange:
-                    passwordChangeForm = new PasswordChangeForm(this);
+                    passwordChangeForm = new PasswordChangeForm(this , ShiftsService);
                     passwordChangeForm.Show();
                     break;
                 case FormName.Clock:
-                    clockForm = new ClockForm(this,empInfo);
+                    clockForm = new ClockForm(this,empInfo, ShiftsService);
                     clockForm.Show();
                     break;
                 default : throw new Exception("Unknown AppState");
@@ -39,7 +41,7 @@ namespace EmployeeClock
 
         public void Run()
         {
-            loginForm = new LoginForm(this);
+            loginForm = new LoginForm(this,ShiftsService);
             loginForm?.Show();
         }
 

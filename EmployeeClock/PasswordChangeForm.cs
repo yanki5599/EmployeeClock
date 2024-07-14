@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmployeeClock.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,11 +14,13 @@ namespace EmployeeClock
     public partial class PasswordChangeForm : Form
     {
         FormHandler FormHandler;
+        ShiftsService ShiftsService;
         private bool ShouldExit = true;
 
-        public PasswordChangeForm(FormHandler formHandler)
+        public PasswordChangeForm(FormHandler formHandler , ShiftsService shiftsService)
         {
             FormHandler = formHandler;
+            ShiftsService = shiftsService;
             InitializeComponent();
         }
 

@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace EmployeeClock.Model
 {
-    internal class PasswordRecord
+    public class PasswordRecord
     {
         public int ID { get; set; } // Primary key, identity column
         public int EmployeeID { get; set; } // Foreign key to Employees table
@@ -21,6 +22,16 @@ namespace EmployeeClock.Model
             EmployeePassword = employeePassword;
             ExpiryDate = expiryDate;
             IsActive = isActive;
+        }
+
+        public bool CompareHash(string strPass)
+        {
+            byte[] hashedBytes;
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(strPass));
+            }
+            return hashedBytes.SequenceEqual(EmployeePassword);
         }
     }
 }

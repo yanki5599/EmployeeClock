@@ -15,11 +15,12 @@ namespace EmployeeClock
     public partial class LoginForm : Form
     {
         FormHandler FormHandler;
-        ShiftsService ShiftsService = new ShiftsService();
+        ShiftsService ShiftsService;
 
         private bool ShouldExit = true;
-        public LoginForm(FormHandler formHandler)
+        public LoginForm(FormHandler formHandler , ShiftsService shiftsService)
         {
+            ShiftsService = shiftsService;
             FormHandler = formHandler;
             InitializeComponent();
         }

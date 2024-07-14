@@ -57,7 +57,7 @@
             label_idNum.Name = "label_idNum";
             label_idNum.Size = new Size(102, 25);
             label_idNum.TabIndex = 0;
-            label_idNum.Text = "315175455";
+            label_idNum.Text = "000000000";
             // 
             // label_lastEnrtyDateLabel
             // 
@@ -76,9 +76,9 @@
             label__lastEnrtyDate.Font = new Font("Segoe UI", 12F);
             label__lastEnrtyDate.Location = new Point(205, 161);
             label__lastEnrtyDate.Name = "label__lastEnrtyDate";
-            label__lastEnrtyDate.Size = new Size(119, 21);
+            label__lastEnrtyDate.Size = new Size(137, 21);
             label__lastEnrtyDate.TabIndex = 1;
-            label__lastEnrtyDate.Text = "01/01/01 12:00";
+            label__lastEnrtyDate.Text = "dd/mm/yy hh:mm";
             // 
             // label_lastExitDateLabel
             // 
@@ -136,9 +136,9 @@
             label_lastExitDate.ForeColor = Color.White;
             label_lastExitDate.Location = new Point(205, 249);
             label_lastExitDate.Name = "label_lastExitDate";
-            label_lastExitDate.Size = new Size(119, 21);
+            label_lastExitDate.Size = new Size(137, 21);
             label_lastExitDate.TabIndex = 1;
-            label_lastExitDate.Text = "01/01/01 12:00";
+            label_lastExitDate.Text = "dd/mm/yy hh:mm";
             // 
             // ClockForm
             // 
@@ -159,6 +159,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             FormClosed += ClockForm_FormClosed;
+            Load += ClockForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

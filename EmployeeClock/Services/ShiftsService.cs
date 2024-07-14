@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeClock.Services
 {
-    internal class ShiftsService : IShiftsService
+    public class ShiftsService : IShiftsService
     {
         AttendenceService AttendenceService { get;  }
         EmployeeService EmployeeService { get; }
@@ -28,7 +28,7 @@ namespace EmployeeClock.Services
         public AttendenceRec? GetLastAttendenseRecord(int empId)
         {
             var list = AttendenceService.GetAttendeesByEmpId(empId);
-            return list.Max();
+            return list.Count > 0 ? list.Max() : null;
         }
 
         public bool IsEmployeeExist(string empTz , out EmpInfo? empInfo)
@@ -47,9 +47,17 @@ namespace EmployeeClock.Services
                 throw new Exception("Critic error: user does not have a password");
             }
 
-            return passRec.EmployeePassword == Utils.Hash256Password(password);
+            return passRec.CompareHash(password);
         }
 
-    
+        public void NewAttent(EmpInfo currentEmpInfo, DateTime entry)
+        {
+            AttendenceService.Create(currentEmpInfo.ID, entry);
+        }
+
+        public void UpdateExit( AttendenceRec last)
+        {
+            AttendenceService.Update(last);
+        }
     }
 }

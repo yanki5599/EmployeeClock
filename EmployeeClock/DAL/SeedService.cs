@@ -51,7 +51,7 @@ namespace EmployeeClock.DAL
                     CREATE TABLE EmployeeAttendance (
                         ID INT PRIMARY KEY IDENTITY,
                         EmployeeCode INT,
-                        EntryTime DATETIME,
+                        EntryTime DATETIME not null,
                         ExitTime DATETIME,
                         FOREIGN KEY (EmployeeCode) REFERENCES Employees(ID)
                     );
