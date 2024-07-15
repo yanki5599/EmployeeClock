@@ -39,7 +39,16 @@ namespace EmployeeClock
         {
             if (ValidateInfo(out EmpInfo? empInfo))
             {
-                FormHandler.Goto(FormName.Clock, empInfo);
+                if (ShiftsService.IsPasswordUptodate(empInfo))
+                {
+                    FormHandler.Goto(FormName.Clock, empInfo);
+                }
+                else
+                {
+                    MessageBox.Show("פג תוקף הסיסמה נא עדכן אותה.", "פג תוקף", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    FormHandler.Goto(FormName.PasswordChange, empInfo);
+                }
+
             }
         }
 

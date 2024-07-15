@@ -50,6 +50,12 @@ namespace EmployeeClock.Services
             return passRec.CompareHash(password);
         }
 
+        public bool IsPasswordUptodate(EmpInfo empInfo)
+        {
+            var passRec = PasswordService.GetByEmpId(empInfo.ID);
+            return passRec.ExpiryDate > DateTime.UtcNow;
+        }
+
         public void NewAttent(EmpInfo currentEmpInfo, DateTime entry)
         {
             AttendenceService.Create(currentEmpInfo.ID, entry);

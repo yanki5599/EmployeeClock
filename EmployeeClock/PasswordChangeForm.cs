@@ -18,11 +18,12 @@ namespace EmployeeClock
         ShiftsService ShiftsService;
         private bool ShouldExit = true;
 
-        public PasswordChangeForm(FormHandler formHandler , ShiftsService shiftsService)
+        public PasswordChangeForm(FormHandler formHandler , ShiftsService shiftsService, EmpInfo? empInfo = null)
         {
             FormHandler = formHandler;
             ShiftsService = shiftsService;
             InitializeComponent();
+            textBox_id.Text = empInfo?.EmployeeNat ?? "";
         }
 
 

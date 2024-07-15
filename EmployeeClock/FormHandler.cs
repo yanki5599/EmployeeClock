@@ -28,7 +28,7 @@ namespace EmployeeClock
                     loginForm.Show();
                     break;
                 case FormName.PasswordChange:
-                    passwordChangeForm = new PasswordChangeForm(this , ShiftsService);
+                    passwordChangeForm = new PasswordChangeForm(this , ShiftsService , empInfo);
                     passwordChangeForm.Show();
                     break;
                 case FormName.Clock:
