@@ -67,12 +67,14 @@ namespace EmployeeClock.DAL
                     catch (SqlException ex)
                     {
                         Console.WriteLine("SQL Error occurred: " + ex.Message);
-                        return null; // Return null or throw exception as per your application's error handling strategy
+                        throw new Exception("SQL Error occurred: " + ex.Message);
+                        //return null; // Return null or throw exception as per your application's error handling strategy
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine("An error occurred: " + ex.Message);
-                        return null; // Return null or throw exception as per your application's error handling strategy
+                        throw new Exception("SQL Error occurred: " + ex.Message);
+                         // Return null or throw exception as per your application's error handling strategy
                     }
                 }
             }
@@ -82,24 +84,24 @@ namespace EmployeeClock.DAL
 
         private static string GetConnString()
         {
-            IConfiguration builder = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("secrets.json") // Add secrets.json
-            .Build();
-            
-            // Read a value from the configuration
-            string connString = builder["ConnectionString"];
-
-            if (connString == null) throw new Exception("conn string is null");
-
-            return connString;
+            var config = new ConfigurationBuilder()
+                        .AddUserSecrets<Program>()
+                        .Build();
+            string? connectionString = config["connectionString"];
+            if (connectionString == null)
+                throw new Exception("Cannot read conn striong from secrets");
+            return connectionString;
         }
 
-        public static int ExecuteNonQuery(string queryStr)
+
+
+
+
+        public static int ExecuteNonQuery(string queryStr,string connString = null)
         {
             int affectedRows = 0;
 
-            using (SqlConnection conn = new SqlConnection(_connectionString))
+            using (SqlConnection conn = new SqlConnection(connString ?? _connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(queryStr, conn))
                 {
@@ -111,7 +113,7 @@ namespace EmployeeClock.DAL
                     catch (SqlException ex)
                     {
                         Console.WriteLine("An error occured: " + ex.Message);
-                        return -1;
+                        throw;//return -1;
                     }
                 }
             }

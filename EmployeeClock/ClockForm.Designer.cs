@@ -157,7 +157,7 @@
             Name = "ClockForm";
             Padding = new Padding(50);
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
+            Text = "שעון כניסה ויציאה";
             FormClosed += ClockForm_FormClosed;
             Load += ClockForm_Load;
             ResumeLayout(false);

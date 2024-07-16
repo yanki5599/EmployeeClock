@@ -1,4 +1,4 @@
-
+﻿
 using EmployeeClock.Model;
 using EmployeeClock.Services;
 
@@ -39,8 +39,8 @@ namespace EmployeeClock
         {
             if (ShouldExit)
             {
-                if (Utils.AreYouSureMsg("??? ??? ???? ??????? ?????")) ;
-                Application.Exit();
+                if (Utils.AreYouSureMsg("האם אתה בטוח שברצונך לצאת?")) ;
+                    Application.Exit();
             }
         }
 

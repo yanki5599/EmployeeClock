@@ -48,11 +48,11 @@ namespace EmployeeClock.Services
         {
             PasswordRecord? passwordRecord = null;
 
-            string query = $"SELECT {Col_ID}, {Col_EmployeeID}, {Col_EmployeePassword}, {Col_ExpiryDate}, {Col_IsActive} " +
+            string query = $"SELECT * " +
                            $"FROM {TableName} " +
                            $"WHERE {Col_EmployeeID} = {empId}";
 
-            var dt = DBContext.MakeQuery(query); 
+            var dt = DBContext.MakeQuery(query);
 
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -61,7 +61,7 @@ namespace EmployeeClock.Services
                 int employeeID = Convert.ToInt32(row[Col_EmployeeID]);
                 byte[] employeePassword = (byte[])row[Col_EmployeePassword];
                 DateTime expiryDate = Convert.ToDateTime(row[Col_ExpiryDate]);
-                bool isActive = Convert.ToBoolean(row[Col_IsActive]);
+                bool isActive = Convert.ToBoolean(row[Col_IsActive] ?? 1);
 
                 passwordRecord = new PasswordRecord(id, employeeID, employeePassword, expiryDate, isActive);
             }
