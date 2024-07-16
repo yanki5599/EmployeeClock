@@ -11,14 +11,14 @@ namespace EmployeeClock
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        static async Task Main()
+        static void Main()
         {
 
 
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            await Task.Run( SeedService.EnsureDataBaseSetup);
+            SeedService.EnsureDataBaseSetup();
             FormHandler formHandler = new FormHandler();
             formHandler.Run();
             Application.Run();
