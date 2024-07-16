@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
+// not used
 namespace EmployeeClock.DAL
 {
     internal static class SeedService
@@ -87,8 +87,24 @@ namespace EmployeeClock.DAL
 
         private static void SeedData()
         {
-            
-        }
+            const string idNat = "315175455";
+            const string fname = "Jacob";
+            const string lname = "Gottlib";
+            const string password = "1234";
+            var now = DateTime.Now; 
+            DateTime tomorrow = new DateTime(now.Year,now.Month,now.Day +1);
 
+            string createEmpAndPass = $@"
+                    IF NOT EXISTS (SELECT 1 FROM Employees)
+                    begin
+                        insert into Employees(EmployeeNat,FirstName,LastName)
+                        values('{idNat}','{fname}','{lname}');
+                        DECLARE @GenId int = (select e.ID from Employees e where e.EmployeeNat = '{idNat}');
+                        insert into Passwords(EmployeeID,EmployeePassword,ExpiryDate)
+                        values(@GenId,HASHBYTES('SHA2_256','{password}'),'{tomorrow.ToShortDateString()}')
+            end";
+            DBContext.ExecuteNonQuery(createEmpAndPass);
+
+        }
     }
 }
