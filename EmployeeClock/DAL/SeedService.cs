@@ -26,7 +26,7 @@ namespace EmployeeClock.DAL
             DBContext.ExecuteNonQuery(quary);
 
         }
-        public static void EnsureTables()
+        private static void EnsureTables()
         {
             try
             {

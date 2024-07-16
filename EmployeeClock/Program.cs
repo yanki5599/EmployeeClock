@@ -18,7 +18,7 @@ namespace EmployeeClock
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-
+            SeedService.EnsureDataBaseSetup();
             FormHandler formHandler = new FormHandler();
             formHandler.Run();
             Application.Run();
